@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{05BFD02D-3330-4B5D-80E7-50AAA7448609}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRTA.Diagnostics.Domain", "src\TRTA.Diagnostics.Domain\TRTA.Diagnostics.Domain.csproj", "{659D50A4-BF9B-43EB-8093-B825AD0BFFEE}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRTA.Diagnostics.Repository", "src\TRTA.Diagnostics.Repository\TRTA.Diagnostics.Repository.csproj", "{9A320685-A344-4139-930D-82ABF3C78856}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TRTA.Diagnostics.RuleEngine.Service", "src\TRTA.Diagnostics.RuleEngine.Service\TRTA.Diagnostics.RuleEngine.Service.csproj", "{5CB76981-36B2-4B28-8D55-E7AE34D4E80A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{659D50A4-BF9B-43EB-8093-B825AD0BFFEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{659D50A4-BF9B-43EB-8093-B825AD0BFFEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{659D50A4-BF9B-43EB-8093-B825AD0BFFEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{659D50A4-BF9B-43EB-8093-B825AD0BFFEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A320685-A344-4139-930D-82ABF3C78856}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A320685-A344-4139-930D-82ABF3C78856}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A320685-A344-4139-930D-82ABF3C78856}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A320685-A344-4139-930D-82ABF3C78856}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CB76981-36B2-4B28-8D55-E7AE34D4E80A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB76981-36B2-4B28-8D55-E7AE34D4E80A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB76981-36B2-4B28-8D55-E7AE34D4E80A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB76981-36B2-4B28-8D55-E7AE34D4E80A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{659D50A4-BF9B-43EB-8093-B825AD0BFFEE} = {05BFD02D-3330-4B5D-80E7-50AAA7448609}
+		{9A320685-A344-4139-930D-82ABF3C78856} = {05BFD02D-3330-4B5D-80E7-50AAA7448609}
+		{5CB76981-36B2-4B28-8D55-E7AE34D4E80A} = {05BFD02D-3330-4B5D-80E7-50AAA7448609}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9608269D-776E-4EF5-84D2-AC1C533B7411}
+	EndGlobalSection
+EndGlobal
