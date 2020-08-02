@@ -16,7 +16,7 @@ try
                  def dateFormat = new SimpleDateFormat("yyyy.MM.dd")
                  def date = new Date()
                  def dateString = dateFormat.format(date)
-                 def versionString = BRANCH_NAME+'.'+BUILD_NUMBER
+                 def versionString = env.BRANCH_NAME+'.'+BUILD_NUMBER
                 
                  currentBuild.displayName = versionString
              
@@ -31,12 +31,23 @@ try
                 // checkout the code from git tfs to the workspace.
                 checkout scm
             }
-            stage('Build Project')
+             stage('Restore Packages')
             {    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
                              {
                                    dir('EFileDiagnostics//Service')                
                                    {
                                        bat 'dotnet restore TRTA.Diagnostics.RuleEngine.sln'
+                                   } 
+                             }
+                  echo "Coming out from Building stage"                
+
+            }
+            stage('Build Project')
+            {    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
+                             {
+                                   dir('EFileDiagnostics//Service')                
+                                   {
+                                       bat 'dotnet build TRTA.Diagnostics.RuleEngine.sln'
                                    } 
                              }
                   echo "Coming out from Building stage"                
