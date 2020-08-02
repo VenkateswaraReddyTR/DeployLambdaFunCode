@@ -1,5 +1,3 @@
-
-#!groovy
 @Library('shared-jenkins') _
 import java.text.SimpleDateFormat
 def Version = null
