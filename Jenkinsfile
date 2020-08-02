@@ -16,7 +16,7 @@ try
                  def dateFormat = new SimpleDateFormat("yyyy.MM.dd")
                  def date = new Date()
                  def dateString = dateFormat.format(date)
-                 def versionString = dateString+'.'+BUILD_NUMBER
+                 def versionString = BRANCH_NAME+'.'+BUILD_NUMBER
                 
                  currentBuild.displayName = versionString
              
