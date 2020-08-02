@@ -1,5 +1,4 @@
-@Library('shared-jenkins') _
-import java.text.SimpleDateFormat
+import java.text.*
 def Version = null
 def FileName = null
 def enableDeploy = 'true'
@@ -10,43 +9,18 @@ try
 {
     timestamps
     {
-        node('brmsnode')
+        node('master')
         {
             stage('Set Version')
             {
-                //Setting the version based on the branch type
-                def dateFormat = new SimpleDateFormat("MM.dd")
-                def date = new Date()
-                def dateString = dateFormat.format(date)
-                def trimCharacters = null
-                def versionString = null
-                def prefix = ''
-                currentBuild.result = 'SUCCESS'
+                 def dateFormat = new SimpleDateFormat("yyyy.MM.dd")
+                 def date = new Date()
+                 def dateString = dateFormat.format(date)
+                 def versionString = dateString+'.'+BUILD_NUMBER
                 
-                switch(BRANCH_NAME)
-                {
-                    case ~/develop/:
-                        trimCharacters = 'develop/'
-                        versionString = dateString+'.${BUILD_NUMBER}'
-                        prefix = BRANCH_NAME
-                        break;
-                    case ~/devops/:
-                        trimCharacters = 'devops/'
-                        versionString = dateString+'.${BUILD_NUMBER}'
-                        prefix = BRANCH_NAME
-                        break;
-                    default:
-                        trimCharacters = ''
-                        versionString = '${BUILD_MONTH}.${BUILD_DAY}.${BUILD_NUMBER}'
-                        prefix = ""
-                        break;
-                }
-                //prefix = powershell returnStdout: true, script: "\"${prefix}\".trim('${trimCharacters}/')"
-                //prefix = prefix.trim()
-                Version = VersionNumber versionNumberString: "$versionString", versionPrefix: "$prefix."
-                FileName = VersionNumber versionNumberString: "$versionString", versionPrefix: ""
-                //The display name needs to always be the version, the deployment jobs depend on this, so don't change it.
-                currentBuild.displayName = Version
+                 currentBuild.displayName = versionString
+             
+                
             }
 
             //pull the source code from git tfs.
@@ -54,43 +28,29 @@ try
             {
                 // delete the existing source code to cleanup the workspace.
                 deleteDir()
-
                 // checkout the code from git tfs to the workspace.
                 checkout scm
             }
-            stage('.Net Restore')
-            {
-                 dir('EFileDiagnostics//Service')
-                {
-                    bat 'dotnet restore TRTA.Diagnostics.RuleEngine.sln'
-                } 
+            stage('Build Project')
+            {    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') 
+                             {
+                                   dir('EFileDiagnostics//Service')                
+                                   {
+                                       bat 'dotnet restore TRTA.Diagnostics.RuleEngine.sln'
+                                   } 
+                             }
+                  echo "Coming out from Building stage"                
 
             }
-            stage('Build')
-            {
-                dir('EFileDiagnostics//Service')
-                {
-                    bat 'dotnet build TRTA.Diagnostics.RuleEngine.sln'
-                }
-            }
-            def MSTestParam = tool 'VSTestTools_MSTest'
-            def zipFileName="$FileName"+".zip"
-            // stage('Unit Tests')
-            // {
-                
-            // }
-            stage('zipping artifacts')
-            {
-                //zipping artifacts
-                zip dir: 'EFileDiagnostics/Service/src/TRTA.Diagnostics.RuleEngine.Service/bin/Debug/netcoreapp2.1/', glob: '', zipFile: zipFileName
+            stage('Send Out Notifications')
+             {     echo"Total URL - > "+"$BUILD_URL"
 
-                // // create a Version folder
-                // powershell "New-Item -Path $WORKSPACE\\$Version -ItemType directory"
-
-                // //pushing zip into Version folder
-                // powershell "Copy-Item -Path $WORKSPACE\\*.zip $WORKSPACE\\$Version"
+                   echo "Sending to darvebhat@gmail.com............"
+                      
+                   echo "Done"
             }
- }
+            
+        }
     }
 }
 catch (e){
