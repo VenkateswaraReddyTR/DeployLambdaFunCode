@@ -67,17 +67,10 @@ try
             }       
             stage('Passing to other job')
             {
-                if( currentBuild.result == 'SUCCESS' )
-                 { 
-                     results = build job: 'sample_test_purpose', parameters: [string(name: 'buildnumber', value: "$zipFileName2")], propagate: false
+                 results = build job: 'sample_test_purpose', parameters: [string(name: 'buildnumber', value: "$zipFileName2")], propagate: false
                    
                     echo 'Zip file has  passed to other job'
-                }
-                else
-                {
-                    echo 'Zip file has not passed to other job'
-                }
-                  
+                                
             }
                     
   
